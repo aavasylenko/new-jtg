@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Jennings Tactical Guns</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+		type="text/css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/hover.css/2.3.1/css/hover-min.css"
+		type="text/css" />
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" type="text/css" />
+
+</head>
+
+<body>
+	<div class="container-fluid navalert-container">
+		<nav class='navbar navbar-dark navbar-expand-sm'>
+			<a href="{{ url_for('index') }}" class='navbar-brand d-lg-none'>JTG</a>
+
+			<button class='navbar-toggler ml-auto' type="button" data-toggle='collapse' data-target='#navbarNavDropdown' aria-controls='navbarNavDropdown' aria-expanded='false' aria-label='Toggle navigation'>
+            <span class='navbar-toggler-icon'></span>
+        </button>
+
+			<div class="collapse navbar-collapse" id="navbarNavDropdown">
+				<ul class='navbar-nav mr-auto'>
+					<li class='active nav-item mr-2'><a class='nav-link' href="{{ url_for('index') }}">Home</a></li>
+					<li class='nav-item mr-2'><a class='nav-link' href='#about'>About</a></li>
+					<li class='nav-item mr-2'><a class='nav-link' href='#gallery'>Gallery</a></li>
+					<li class='nav-item mr-2'><a class='nav-link' href='#contact'>Contact</a></li>
+                    <li class='nav-item mr-2'><a class='nav-link' href="{{ url_for('shop') }}">Shop</a></li>
+					<div class="row">
+						<div class="logo-row">
+							<a href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='assets/logo.png') }}" alt="Company Logo" width='125' height='125' class="logo-top d-none d-sm-block"></a>
+						</div>
+					</div>
+		</nav>
+	</div>
+	{% block content %}
+	{% endblock %}
+	<!--Contact-->
+	<div class="container-wrapper container-wrapper--black" id="contact">
+		<div class="container about-container content-container">
+			<section class="about" id="about">
+				<div class="row">
+					<div class="col-12">
+						<div class="col-12 page-header">
+							<h2 class='text-uppercase'>How to contact us</h2>
+							<hr class='block-divider block-divider--white'>
+						</div>
+						<div class="row">
+							<div class="col-12">
+								<p class="contact-details">
+									Give us a call, text or email to start talking about your next firearm
+								</p>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<h3 class="contact-icon"><i class="fa fa-envelope"></i></h3>
+								<div>
+									<a href="mailto:jenningstacticalguns@yahoo.com?Subject=Custom%20Firearm"
+										target="_top">
+										jenningstacticalguns@yahoo.com</a>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<h3 class="contact-icon"><i class="fa fa-phone"></i></h3>
+								<div class="key">
+									<p>Sean</p>
+								</div>
+								<span class="value">
+                                            <p>
+                                                <a href="tel:5122871991">512-287-1991</a>
+                                                </p>
+                                        </span>
+								<div class="key">
+									<p>Brandon</p>
+								</div>
+								<span class="value">
+                                            <p>
+                                                <a href="tel:5129251462">512-925-1462</a>
+                                                </p>
+                                        </span>
+								<div class="key">
+									<p>Scott</p>
+								</div>
+								<span class="value">
+                                            <p>
+                                                <a href="tel:5129250858">512-925-0858</a>
+                                                </p>
+                                        </span>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div>
+
+
+
+	<!--Footer-->
+	<footer class="container-wrapper">
+		<div id="footer-details" class="row">
+			<div class="col-sm-6">
+				<p class="inline-block">
+					Jennings Tactical Guns, LLC.
+				</p>
+			</div>
+			<div class="col-sm-6">
+				<h5 class="uppercase general-sub">Social</h5>
+				<ul class='list-inline social-links'>
+					<li class='list-inline-item'>
+						<a target='_blank' href="https://www.facebook.com/jenningstacticalguns/">
+							<i class="fa fa-facebook" aria-hidden='true'></i>
+							<span class='sr-only'>Facebook</span>
+						</a>
+					</li>
+					<li class='list-inline-item'>
+						<a target='_blank' href="https://twitter.com/GunsJennings?lang=en">
+							<i class="fa fa-twitter" aria-hidden='true'></i>
+							<span class='sr-only'>Twitter</span>
+						</a>
+					</li>
+					<li class='list-inline-item'>
+						<a target='_blank' href="https://www.instagram.com/jennings_tactical_guns/">
+							<i class="fa fa-instagram" aria-hidden='true'></i>
+							<span class='sr-only'>Instagram</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+	</footer>
+
+	<!--/.footer-->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+	</script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+	</script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+	</script>
+</body>
+
+</html>
