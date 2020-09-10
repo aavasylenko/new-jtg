@@ -1,4 +1,5 @@
 {% extends 'base.html' %} {% block content %}
+{% if session|user == "admin" %}
 <div class="login-container container-fluid">
 <form class="login-form" method="POST" action="{{ url_for('change_pass') }}">
   <div class="form-group">
@@ -16,4 +17,5 @@
   <button type="submit" class="btn btn-primary">Change Password</button>
 </form>
 </div>
+{% endif %}
 {% endblock %}

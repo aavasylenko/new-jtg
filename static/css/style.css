@@ -2,6 +2,13 @@ body {
   font-family: "Roboto", sans-serif;
 }
 
+.alert-primary {
+    margin: auto;
+    margin-top: 75px;
+    width: fit-content;
+    z-index: 2;
+}
+
 html,
 body {
   overflow-x: hidden;
