@@ -7,6 +7,10 @@ body {
   overflow-x: hidden;
 }
 
+a {
+    color: #fafafa;
+}
+
 a:link {
   text-decoration: none;
   color: #fafafa;
@@ -256,6 +260,20 @@ a:active {
 
 /*----------------------------Footer*/
 
+#contact {
+    padding: 10px 30px;
+}
+
+.key {
+    font-weight: bold;
+    font-size: large;
+}
+
+
+.value {
+    float: right;
+}
+
 footer {
   background-color: #525252;
   color: #fafafa;
@@ -292,6 +310,11 @@ footer {
   padding-bottom: 0;
 }
 
+.r-align {
+    float: right;
+    bottom: 0;
+}
+
 /*-----------------------------------------About*/
 .about-story {
   text-align: center;
@@ -323,6 +346,10 @@ footer {
 .key .value {
   padding-right: 8px;
   display: inline;
+}
+
+#contact {
+    align-items: right;
 }
 
 .key p,
@@ -397,6 +424,21 @@ footer {
     background-color: #fafafa;
     border: solid 1px black;
 }
+
+.login-container {
+    padding: 30px;
+    padding-top: 50px;
+    overflow: hidden;
+}
+
+.login-form {
+    padding: 15px;
+}
+
+.flashes h4 {
+    line-height: 2;
+}
+
 /*------------------------Media Queries*/
 
 @media(max-width: 600px) {

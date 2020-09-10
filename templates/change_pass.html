@@ -1,0 +1,19 @@
+{% extends 'base.html' %} {% block content %}
+<div class="login-container container-fluid">
+<form class="login-form" method="POST" action="{{ url_for('change_pass') }}">
+  <div class="form-group">
+    <label for="old_password">Current Password</label>
+    <input type="password" name="old_password" class="form-control" id="old_password" aria-describedby="emailHelp">
+  </div>
+  <div class="form-group">
+    <label for="new_password">New Password</label>
+    <input type="password" name="new_password" class="form-control" id="new_password">
+  </div>
+  <div class="form-group">
+    <label for="confirm_new_password">Confirm New Password</label>
+    <input type="password" name="confirm_new_password" class="form-control" id="confirm_new_password">
+  </div>
+  <button type="submit" class="btn btn-primary">Change Password</button>
+</form>
+</div>
+{% endblock %}

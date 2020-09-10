@@ -29,10 +29,13 @@
 			<div class="collapse navbar-collapse" id="navbarNavDropdown">
 				<ul class='navbar-nav mr-auto'>
 					<li class='active nav-item mr-2'><a class='nav-link' href="{{ url_for('index') }}">Home</a></li>
-					<li class='nav-item mr-2'><a class='nav-link' href='#about'>About</a></li>
-					<li class='nav-item mr-2'><a class='nav-link' href='#gallery'>Gallery</a></li>
-					<li class='nav-item mr-2'><a class='nav-link' href='#contact'>Contact</a></li>
-                    <li class='nav-item mr-2'><a class='nav-link' href="{{ url_for('shop') }}">Shop</a></li>
+					<li class='nav-item mr-2'><a class='nav-link'
+							href="{{ url_for('index', _anchor='about') }}">About</a></li>
+					<li class='nav-item mr-2'><a class='nav-link'
+							href="{{ url_for('index', _anchor='gallery') }}">Gallery</a></li>
+					<li class='nav-item mr-2'><a class='nav-link'
+							href="{{ url_for('index', _anchor='contact') }}">Contact</a></li>
+					<li class='nav-item mr-2'><a class='nav-link' href="{{ url_for('shop') }}">Shop</a></li>
 					<div class="row">
 						<div class="logo-row">
 							<a href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='assets/logo.png') }}" alt="Company Logo" width='125' height='125' class="logo-top d-none d-sm-block"></a>
@@ -40,78 +43,86 @@
 					</div>
 		</nav>
 	</div>
+    <section>
+    <!--flash messages-->
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for message in messages %}
+                <div class="row flashes">
+                    <h4 class="center-align">{{ message }}</h4>
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    </section>
+
 	{% block content %}
 	{% endblock %}
 	<!--Contact-->
 	<div class="container-wrapper container-wrapper--black" id="contact">
-		<div class="container about-container content-container">
-			<section class="about" id="about">
-				<div class="row">
-					<div class="col-12">
-						<div class="col-12 page-header">
-							<h2 class='text-uppercase'>How to contact us</h2>
-							<hr class='block-divider block-divider--white'>
+		<section class="contact">
+			<div class="row contact-row">
+				<div class="col-12">
+					<div class="col-12 page-header">
+						<h2 class='text-uppercase'>How to contact us</h2>
+						<hr class='block-divider block-divider--white'>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<p class="contact-details">
+								Give us a call, text or email to start talking about your next firearm
+							</p>
 						</div>
-						<div class="row">
-							<div class="col-12">
-								<p class="contact-details">
-									Give us a call, text or email to start talking about your next firearm
-								</p>
+					</div>
+					<div class="row">
+						<div class="col-md-6 ">
+							<div class="float-md-right">
+                            <h3 class="contact-icon"><i class="fa fa-envelope"></i></h3>
+								<a href="mailto:jenningstacticalguns@yahoo.com?Subject=Custom%20Firearm" target="_top">
+									jenningstacticalguns@yahoo.com</a>
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-md-6">
-								<h3 class="contact-icon"><i class="fa fa-envelope"></i></h3>
+						<div class="col-md-6 phone-numbers">
+							<h3 class="contact-icon"><i class="fa fa-phone"></i></h3>
+							<div>
 								<div>
-									<a href="mailto:jenningstacticalguns@yahoo.com?Subject=Custom%20Firearm"
-										target="_top">
-										jenningstacticalguns@yahoo.com</a>
-								</div>
-							</div>
-							<div class="col-md-6">
-								<h3 class="contact-icon"><i class="fa fa-phone"></i></h3>
-								<div class="key">
-									<p>Sean</p>
-								</div>
-								<span class="value">
-                                            <p>
+									<span class="key">
+									Sean
+								</span>
+									<span class="value">
                                                 <a href="tel:5122871991">512-287-1991</a>
-                                                </p>
                                         </span>
-								<div class="key">
-									<p>Brandon</p>
 								</div>
-								<span class="value">
-                                            <p>
+								<div>
+									<span class="key">
+
+									Brandon
+								</span>
+									<span class="value">
                                                 <a href="tel:5129251462">512-925-1462</a>
-                                                </p>
                                         </span>
-								<div class="key">
-									<p>Scott</p>
 								</div>
-								<span class="value">
-                                            <p>
+								<div>
+									<span class="key">
+									Scott
+								</span>
+									<span class="value">
                                                 <a href="tel:5129250858">512-925-0858</a>
-                                                </p>
                                         </span>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</section>
-		</div>
+			</div>
+		</section>
 	</div>
 
 
 
 	<!--Footer-->
-	<footer class="container-wrapper">
+	<footer class="container-wrapper--black">
 		<div id="footer-details" class="row">
-			<div class="col-sm-6">
-				<p class="inline-block">
-					Jennings Tactical Guns, LLC.
-				</p>
-			</div>
 			<div class="col-sm-6">
 				<h5 class="uppercase general-sub">Social</h5>
 				<ul class='list-inline social-links'>
@@ -135,6 +146,24 @@
 					</li>
 				</ul>
 			</div>
+            <div class="col-sm-6">
+                {% if session.user == "admin" %}
+                <div class="d-flex align-items-end flex-column">
+					<a href="{{ url_for('logout' )}}">Log Out</a>
+				</div>
+                <div class="d-flex align-items-end flex-column">
+					<a href="{{ url_for('change_pass' )}}">Change Password</a>
+				</div>
+                {% else %}
+                <div class="d-flex align-items-end flex-column">
+					<a href="{{ url_for('login' )}}">Admin</a>
+				</div>
+                {% endif %}
+				<div class="d-flex align-items-end flex-column">
+					Jennings Tactical Guns, LLC.
+				</div>
+                </div>
+			</div>
 		</div>
 
 	</footer>
@@ -149,6 +178,7 @@
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
 	</script>
+	<script src="{{ url_for('static', filename='scripts/script.js') }}"></script>
 </body>
 
 </html>
