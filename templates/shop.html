@@ -6,20 +6,25 @@
   <div class="opaque-overlay opaque-overlay-shop">&nbsp;</div>
   <div class="row cards-row">
     {% for product in products %}
-    {% if session.user == "admin" %}
+
     <div class="col-lg-3 col-md-4 col-xs-12 card">
       <img
         class="card-img-top"
-        src="{{ url_for('static', filename='assets/dummy.jpg') }}"
+        src="{{ product.img_src }}"
         alt="Card image cap"
       />
       <div class="card-body d-flex flex-column">
         <h5 class="card-title">{{ product.name }}</h5>
         <p>{{ product.price }}</p>
+        {% if product.is_available == "on" %}
+        <p class="stock-indicator-on d-flex flex-column">In Stock</p>
+        {% else %}
+        <p class="stock-indicator-off d-flex flex-column">Out of Stock</p>
+        {% endif %}
         <a href="#" class="btn btn-primary mt-auto">Add to cart</a>
       </div>
     </div>
-    {% endif %}
+
     {% endfor %}
   </div>
 </div>

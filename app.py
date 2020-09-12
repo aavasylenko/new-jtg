@@ -84,6 +84,25 @@ def change_pass():
     else:
         return redirect('/index')
 
+
+@app.route('/add_products', methods=["GET", "POST"])
+def add_products():
+    if session["user"] == "admin":
+        if request.method == "POST":
+            is_available = "on" if request.form.get("is_available") else "off"
+            product = {
+                "name": request.form.get("product_name"),
+                "price": request.form.get("price"),
+                "is_available": is_available,
+                "img_src": request.form.get("img_src")
+            }
+            mongo.db.products.insert_one(product)
+            flash("Product Successfully Added")
+            return redirect(url_for('shop'))
+        return render_template('add_products.html')
+    else:
+        return redirect(url_for('index'))
+
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),

@@ -5,6 +5,7 @@ body {
 .alert-primary {
     margin: auto;
     margin-top: 75px;
+    margin-bottom: 5px;
     width: fit-content;
     z-index: 2;
 }
@@ -396,7 +397,7 @@ footer {
   justify-content: center;
 }
 
-/*-----------------------------------Cards*/
+/*-----------------------------------Shop*/
 .cards-container {
     margin: auto;
     background: url('../assets/1.jpeg') no-repeat top center fixed; 
@@ -411,12 +412,22 @@ footer {
     margin: 10px;
     width: auto;
     height: auto;
-    background-color: #dddddd;
+    background-color: #d8d8d8;
     border-radius: .5rem;
 }
 
 .opaque-overlay-shop {
       position: fixed;
+}
+
+.stock-indicator-on {
+    color: rgb(3, 197, 3);
+    font-weight: bold;
+}
+
+.stock-indicator-off {
+    color: red;
+    font-weight: bold;
 }
 
 .btn-primary {
@@ -432,10 +443,12 @@ footer {
     border: solid 1px black;
 }
 
-.login-container {
+.form-container {
     padding: 30px;
     padding-top: 50px;
     overflow: hidden;
+    margin-top: 75px;
+    width: auto;
 }
 
 .login-form {
@@ -444,6 +457,10 @@ footer {
 
 .flashes h4 {
     line-height: 2;
+}
+
+.products-form {
+
 }
 
 /*------------------------Media Queries*/
