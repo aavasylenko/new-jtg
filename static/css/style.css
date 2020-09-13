@@ -26,6 +26,7 @@ a:link {
 
 a:visited {
   text-decoration: none;
+  color: #fafafa;
 }
 
 a:hover {
@@ -459,8 +460,13 @@ footer {
     line-height: 2;
 }
 
-.products-form {
+.btn {
+    margin: 5px 0;
+}
 
+.fof {
+    width: auto;
+    margin: 75px auto;
 }
 
 /*------------------------Media Queries*/

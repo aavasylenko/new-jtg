@@ -3,28 +3,32 @@
 {% if session.user == "admin" %}
 
 <div class="form-container container-fluid">
-<form class="products-form" method="POST" action="{{ url_for('add_products') }}">
+<form class="products-form" method="POST" action="{{ url_for('edit_product', product_id=product._id) }}">
   <div class="form-group">
     <label for="product_name">Product Name</label>
-    <input type="text" class="form-control" id="product_name" name="product_name" aria-describedby="emailHelp">
+    <input type="text" class="form-control" id="product_name" name="product_name" value="{{ product.name }}" required>
   </div>
   <div class="form-group">
     <label for="price">Price</label>
-    <input type="text" class="form-control" id="price" name="price">
+    <input type="text" class="form-control" id="price" name="price" value="{{ product.price }}" required>
   </div>
   <div class="form-group">
     <label for="img_src">Link to image</label>
-    <input type="text" class="form-control" id="img_src" name="img_src">
+    <input type="text" class="form-control" id="img_src" name="img_src"value="{{ product.img_src }}" required>
     <small id="img_help" class="form-text text-muted">Please make sure to use a direct link to the image (Should end in .jpg or .jpeg)</small>
   </div>
   <div class="form-group form-check">
+    {% if product.is_available == "on" %}
+    <input type="checkbox" class="form-check-input" id="is_available" name="is_available" checked>
+    {% else %}
     <input type="checkbox" class="form-check-input" id="is_available" name="is_available">
+    {% endif %}
     <label class="form-check-label" for="is_available">In Stock</label>
   </div>
   <a href="{{ url_for('shop') }}" class="btn btn-danger">Cancel
             <i class="fa fa-times-circle right"></i>
             </a>
-  <button type="submit" class="btn btn-success">Add <i class="fa fa-plus-square right"></i></button>
+  <button type="submit" class="btn btn-success">Udate <i class="fa fa-edit right"></i></button>
 </form>
 </div>
 

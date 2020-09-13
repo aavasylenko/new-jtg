@@ -27,6 +27,10 @@ def shop():
     return render_template('shop.html', products=products)
 
 
+@app.route('/404')
+def fourofour():
+    return render_template("404.html")
+
 @app.route("/login", methods=["GET", "POST"])
 def login():
     if request.method == "POST":
@@ -102,6 +106,61 @@ def add_products():
         return render_template('add_products.html')
     else:
         return redirect(url_for('index'))
+
+#3-step deletion process:
+
+@app.route('/first_delete/<product_id>', methods=["GET", "POST"])
+def first_delete(product_id):
+    if session["user"] == "admin":
+        if mongo.db.products.find({"_id": ObjectId(product_id)}):
+            return redirect(url_for('confirm', product_id=product_id))
+        else:
+            return redirect(url_for("fourofour"))
+    else:
+        return redirect(url_for("shop"))
+    
+
+@app.route('/confirm/<product_id>', methods=["GET", "POST"])
+def confirm(product_id):
+    if mongo.db.products.find({"_id": ObjectId(product_id)}):
+        if session["user"] == "admin":
+            products = mongo.db.products.find({"_id": ObjectId(product_id)})
+            return render_template('confirm.html', products=products)
+        else:
+            return redirect(url_for("fourofour"))
+    else:
+        return redirect(url_for("fourofour"))
+
+
+@app.route('/final_delete/<product_id>')
+def final_delete(product_id):
+    if session["user"] == "admin":
+        mongo.db.products.remove({"_id": ObjectId(product_id)})
+        flash("Product Successfully Deleted")
+        return redirect(url_for("shop"))
+    else:
+        return redirect(url_for("fourofour"))
+
+#############################################################################################
+
+
+@app.route('/edit_product/<product_id>', methods=["GET", "POST"])
+def edit_product(product_id):
+    if request.method == "POST":
+        is_available = "on" if request.form.get("is_available") else "off"
+        submit = {
+            "name": request.form.get("product_name"),
+            "price": request.form.get("price"),
+            "is_available": is_available,
+            "img_src": request.form.get("img_src"),
+        }
+        mongo.db.products.update({"_id": ObjectId(product_id)}, submit)
+        flash("Product Successfully Updated")
+        return redirect(url_for('shop'))
+
+    product = mongo.db.products.find_one({"_id": ObjectId(product_id)})
+    return render_template('edit_product.html', product=product)
+
 
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
