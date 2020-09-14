@@ -469,6 +469,12 @@ footer {
     margin: 75px auto;
 }
 
+
+/*------------------------------Search Bar*/
+.search-form {
+    margin-top: 75px;
+}
+
 /*------------------------Media Queries*/
 
 @media(max-width: 600px) {

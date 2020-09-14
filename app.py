@@ -23,13 +23,22 @@ def index():
 
 @app.route("/shop", methods = ["GET", "POST"])
 def shop():
-    products = list(mongo.db.products.find())
+    products = mongo.db.products.find()
     return render_template('shop.html', products=products)
 
 
 @app.route('/404')
 def fourofour():
     return render_template("404.html")
+
+
+@app.route('/search', methods=["GET", "POST"])
+def search():
+    query = request.form.get("query")
+    products = list(mongo.db.products.find({"$text": {"$search": query}}))
+    return render_template("shop.html", products=products)    
+
+
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
@@ -107,33 +116,10 @@ def add_products():
     else:
         return redirect(url_for('index'))
 
-#3-step deletion process:
-
-@app.route('/first_delete/<product_id>', methods=["GET", "POST"])
-def first_delete(product_id):
-    if session["user"] == "admin":
-        if mongo.db.products.find({"_id": ObjectId(product_id)}):
-            return redirect(url_for('confirm', product_id=product_id))
-        else:
-            return redirect(url_for("fourofour"))
-    else:
-        return redirect(url_for("shop"))
-    
-
-@app.route('/confirm/<product_id>', methods=["GET", "POST"])
-def confirm(product_id):
-    if mongo.db.products.find({"_id": ObjectId(product_id)}):
-        if session["user"] == "admin":
-            products = mongo.db.products.find({"_id": ObjectId(product_id)})
-            return render_template('confirm.html', products=products)
-        else:
-            return redirect(url_for("fourofour"))
-    else:
-        return redirect(url_for("fourofour"))
 
 
-@app.route('/final_delete/<product_id>')
-def final_delete(product_id):
+@app.route('/delete_product/<product_id>')
+def delete_product(product_id):
     if session["user"] == "admin":
         mongo.db.products.remove({"_id": ObjectId(product_id)})
         flash("Product Successfully Deleted")
