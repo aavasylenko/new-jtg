@@ -472,7 +472,17 @@ footer {
 
 /*------------------------------Search Bar*/
 .search-form {
+    margin: auto;
     margin-top: 75px;
+}
+
+.col-search {
+    margin: auto;
+    padding: 0;
+}
+
+.center-align {
+    flex-wrap: nowrap;
 }
 
 /*------------------------Media Queries*/

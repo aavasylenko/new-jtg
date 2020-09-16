@@ -5,17 +5,17 @@
   <div class="row">
     <form action="{{ url_for('search') }}" method="post" class="search-form">
         <div class="row valign-wrapper center-align">
-            <div class="input-field col s12 m8">
-                <i class="fa fa-search prefix light-blue-text text-darken-4"></i>
+            <div class="input-field col-8 col-search">
                 <input type="text" name="query" id="query" minlength="3" placeholder="Search" class="validate form-control mr-sm-2"  required>
-                <label for="query">Search Tasks</label>
             </div>
-            <div class="col s12 m4">
-                <a href="{{ url_for('shop') }}" class="red btn text-shadow">Reset</a>
-                <button type="submit" class="btn btn-outline-success my-2 my-sm-0">
-                    <i class="fa fa-search left"></i>Search
+            <div class="col-8 col-search">
+            <button type="submit" class="btn btn-warning my-2 my-sm-0">
+                    <i class="fa fa-search left"></i>
                 </button>
+                <a href="{{ url_for('shop') }}" class="btn btn-dark">Reset</a>
+                
             </div>
+            <button type="button" class="btn btn-primary">Primary</button>
         </div>    
     </form>
 </div>
