@@ -3,19 +3,21 @@
 {% if session.user == "admin" %}
 
 <div class="form-container container-fluid">
-<form class="products-form" method="POST" action="{{ url_for('add_products') }}">
+<form class="products-form" method="POST" action="{{ url_for('add_products') }}" enctype="multipart/form-data">
   <div class="form-group">
     <label for="product_name">Product Name</label>
-    <input type="text" class="form-control" id="product_name" name="product_name" aria-describedby="emailHelp">
+    <input type="text" class="form-control" id="product_name" name="product_name" required>
   </div>
   <div class="form-group">
     <label for="price">Price</label>
-    <input type="text" class="form-control" id="price" name="price">
+    <input type="text" class="form-control" id="price" name="price" required>
   </div>
   <div class="form-group">
-    <label for="img_src">Link to image</label>
-    <input type="text" class="form-control" id="img_src" name="img_src">
-    <small id="img_help" class="form-text text-muted">Please make sure to use a direct link to the image (Should end in .jpg or .jpeg)</small>
+
+    <div><label for="image">Choose Product Image</label></div>
+    <input type="file" name="image" id="image" accept=".jpg, .jpeg, .png" required>
+    <div>
+       </div>
   </div>
   <div class="form-group form-check">
     <input type="checkbox" class="form-check-input" id="is_available" name="is_available">

@@ -5,6 +5,7 @@ from flask import (
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 from werkzeug.security import generate_password_hash, check_password_hash
+import uuid
 if os.path.exists("env.py"):
     import env
 
@@ -98,24 +99,34 @@ def change_pass():
         return redirect('/index')
 
 
+
 @app.route('/add_products', methods=["GET", "POST"])
 def add_products():
     if session["user"] == "admin":
         if request.method == "POST":
             is_available = "on" if request.form.get("is_available") else "off"
-            product = {
-                "name": request.form.get("product_name"),
-                "price": request.form.get("price"),
-                "is_available": is_available,
-                "img_src": request.form.get("img_src")
-            }
-            mongo.db.products.insert_one(product)
-            flash("Product Successfully Added")
-            return redirect(url_for('shop'))
+            if 'image' in request.files:
+                image = request.files['image']
+                if mongo.db.products.find_one({"img_src": image.filename}):
+                    image.filename = uuid.uuid4().hex[:6].upper()
+                mongo.save_file(image.filename, image)
+                product = {
+                    "name": request.form.get("product_name"),
+                    "price": request.form.get("price"),
+                    "is_available": is_available,
+                    "img_src": image.filename
+                }
+                mongo.db.products.insert_one(product)
+                flash("Product Successfully Added")
+                return redirect(url_for('shop'))
         return render_template('add_products.html')
     else:
         return redirect(url_for('index'))
 
+
+@app.route('/file/<filename>')
+def file(filename):
+    return mongo.send_file(filename)
 
 
 @app.route('/delete_product/<product_id>')
