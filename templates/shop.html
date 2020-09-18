@@ -37,7 +37,7 @@
         {% else %}
         <p class="stock-indicator-off d-flex flex-column">Out of Stock</p>
         {% endif %}
-        <a href="#" class="btn btn-primary mt-auto">Add to cart</a>
+        <a href="mailto:jenningstacticalguns@yahoo.com?Subject=Order%20Item&body=Hi%20there,%0d%0dI`d%20like%20to%20order%20{{product.name}}%20from%20your%20website." target="_top" class="btn btn-primary mt-auto">Order</a>
         {% if session.user == 'admin' %}
         <a
           href="{{ url_for('edit_product', product_id=product._id ) }}"
