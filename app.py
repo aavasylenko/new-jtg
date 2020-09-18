@@ -143,20 +143,23 @@ def delete_product(product_id):
 
 @app.route('/edit_product/<product_id>', methods=["GET", "POST"])
 def edit_product(product_id):
-    if request.method == "POST":
-        is_available = "on" if request.form.get("is_available") else "off"
-        submit = {
-            "name": request.form.get("product_name"),
-            "price": request.form.get("price"),
-            "is_available": is_available,
-            "img_src": request.form.get("img_src"),
-        }
-        mongo.db.products.update({"_id": ObjectId(product_id)}, submit)
-        flash("Product Successfully Updated")
-        return redirect(url_for('shop'))
+    if session["user"] == "admin":
+        if request.method == "POST":
+            is_available = "on" if request.form.get("is_available") else "off"
+            submit = {
+                "name": request.form.get("product_name"),
+                "price": request.form.get("price"),
+                "is_available": is_available,
+                "img_src": request.form.get("img_src"),
+            }
+            mongo.db.products.update({"_id": ObjectId(product_id)}, submit)
+            flash("Product Successfully Updated")
+            return redirect(url_for('shop'))
 
-    product = mongo.db.products.find_one({"_id": ObjectId(product_id)})
-    return render_template('edit_product.html', product=product)
+        product = mongo.db.products.find_one({"_id": ObjectId(product_id)})
+        return render_template('edit_product.html', product=product)
+    else:
+        return redirect(url_for("fourofour"))
 
 
 if __name__ == "__main__":
