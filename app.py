@@ -18,9 +18,11 @@ app.secret_key = os.environ.get("SECRET_KEY")
 
 mongo = PyMongo(app)
 
-@app.route("/", methods = ["GET", "POST"])
+
+@app.route('/', methods=["GET", "POST"])
 def index():
     return render_template('index.html')
+
 
 @app.route("/shop", methods = ["GET", "POST"])
 def shop():
@@ -78,25 +80,23 @@ def logout():
 def change_pass():
     if session["user"] == "admin":
         if request.method == "POST":
-            existing_user = mongo.db.users.find_one({"email": "jenningstacticalguns@yahoo.com"})
-            
+            existing_user = mongo.db.users.find_one({"email": "jenningstacticalguns@yahoo.com"})          
             if existing_user:
-                if check_password_hash(
-                    existing_user["password"], request.form.get("old_password")):
+                if check_password_hash(existing_user["password"], request.form.get("old_password")):
                     if request.form.get("new_password") == request.form.get("confirm_new_password"):
                         mongo.db.users.update(
                             {"username": "admin"}, {"password": generate_password_hash(request.form.get("new_password")), "username": "admin", "email": "jenningstacticalguns@yahoo.com"})
                         flash("Password changed successfully")
-                        return redirect('/index')
+                        return redirect(url_for('index'))
                     else:
                         flash("Passwords don't match")
-                        return redirect('/change_pass')
+                        return redirect(url_for('change_pass'))
                 else:
                     flash("Incorrect current password")
-                    return redirect('/change_pass')
+                    return redirect(url_for('change_pass'))
         return render_template('change_pass.html')
     else:
-        return redirect('/index')
+        return redirect(url_for('index'))
 
 
 
@@ -165,4 +165,4 @@ def edit_product(product_id):
 if __name__ == "__main__":
     app.run(host=os.environ.get("IP"),
             port=int(os.environ.get("PORT")),
-            debug=False)
+            debug=True)
