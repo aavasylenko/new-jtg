@@ -169,6 +169,15 @@ a:active {
   font-weight: bold;
 }
 
+.dropdown-menu {
+  background-color: rgba(0, 0, 0, 0.75);
+}
+
+
+.dropdown-item {
+    text-align: center;
+}
+
 /*Jumbotron*/
 
 .jumbotron {
@@ -476,15 +485,11 @@ footer {
     margin-top: 75px;
 }
 
-.col-search {
-    margin: auto;
-    padding: 0;
-}
 
-.center-align {
-    flex-wrap: nowrap;
-}
 
+.btn-search {
+    margin: 0;
+}
 /*------------------------Media Queries*/
 
 @media(max-width: 600px) {

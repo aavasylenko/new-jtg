@@ -35,7 +35,15 @@
 							href="{{ url_for('index', _anchor='gallery') }}">Gallery</a></li>
 					<li class='nav-item mr-2'><a class='nav-link'
 							href="{{ url_for('index', _anchor='contact') }}">Contact</a></li>
-					<li class='nav-item mr-2'><a class='nav-link' href="{{ url_for('shop') }}">Shop</a></li>
+                    <li class="nav-item dropdown mr-2">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Shop
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" href="{{ url_for('shop_ammo') }}">Ammo</a>
+          <a class="dropdown-item" href="{{ url_for('shop_parts') }}">Gun parts</a>
+    
+      </li>
                     {% if session.user == "admin" %}
                     <li class='nav-item mr-2'><a class='nav-link' href="{{ url_for('add_products') }}">Add Products</a></li>
                     {% endif %}

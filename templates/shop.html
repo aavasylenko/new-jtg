@@ -4,24 +4,23 @@
   <div class="opaque-overlay opaque-overlay-shop">&nbsp;</div>
   <div class="row">
     <form action="{{ url_for('search') }}" method="post" class="search-form">
-        <div class="row valign-wrapper center-align">
-            <div class="input-field col-8 col-search">
-                <input type="text" name="query" id="query" minlength="3" placeholder="Search" class="validate form-control mr-sm-2"  required>
-            </div>
-            <div class="col-8 col-search">
-            <button type="submit" class="btn btn-warning my-2 my-sm-0">
-                    <i class="fa fa-search left"></i>
-                </button>
-                <a href="{{ url_for('shop') }}" class="btn btn-dark">Reset</a>
+
+            <div class="input-group mb-3">
+                <input type="text" name="query" id="query" minlength="3" placeholder="Search" class="form-control"  required>
+
+                <div class="input-group-append">
+    <button class="btn btn-warning btn-search" type="submit"><i class="fa fa-search left"></i></button>
+  </div>
                 
             </div>
-        </div>    
+   
     </form>
 </div>
 
-
+{% if products|length > 0 %}
   <div class="row cards-row">
     {% for product in products %}
+ 
     <div class="col-lg-3 col-md-4 col-xs-12 card">
       <img
         class="card-img-top"
@@ -93,6 +92,10 @@
     {% endfor %}
   </div>
 </div>
+{% else %}
+
+  <h3 class="red-text text-darken-4 center-align">No Results Found</h3>
+{% endif %}
 
 <!-- Modal -->
 

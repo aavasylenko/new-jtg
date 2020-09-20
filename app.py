@@ -24,9 +24,15 @@ def index():
     return render_template('index.html')
 
 
-@app.route("/shop", methods = ["GET", "POST"])
-def shop():
-    products = mongo.db.products.find()
+@app.route("/shop_ammo", methods = ["GET", "POST"])
+def shop_ammo():
+    products = list(mongo.db.products.find({"category": "ammo"}))
+    return render_template('shop.html', products=products)
+
+
+@app.route("/shop_parts", methods = ["GET", "POST"])
+def shop_parts():
+    products = list(mongo.db.products.find({"category": "parts"}))
     return render_template('shop.html', products=products)
 
 
@@ -40,6 +46,8 @@ def search():
     query = request.form.get("query")
     products = list(mongo.db.products.find({"$text": {"$search": query}}))
     return render_template("shop.html", products=products)    
+
+
 
 
 
@@ -114,12 +122,14 @@ def add_products():
                     "name": request.form.get("product_name"),
                     "price": request.form.get("price"),
                     "is_available": is_available,
+                    "category": request.form.get("category"),
                     "img_src": image.filename
                 }
                 mongo.db.products.insert_one(product)
                 flash("Product Successfully Added")
-                return redirect(url_for('shop'))
-        return render_template('add_products.html')
+                return redirect(url_for('index'))
+        categories = mongo.db.categories.find()
+        return render_template('add_products.html', categories=categories)
     else:
         return redirect(url_for('index'))
 
@@ -150,14 +160,16 @@ def edit_product(product_id):
                 "name": request.form.get("product_name"),
                 "price": request.form.get("price"),
                 "is_available": is_available,
-                "img_src": request.form.get("img_src"),
+                "category": request.form.get("category"),
+                "img_src": request.form.get("img_src")
             }
             mongo.db.products.update({"_id": ObjectId(product_id)}, submit)
             flash("Product Successfully Updated")
-            return redirect(url_for('shop'))
+            return redirect(url_for('index'))
 
+        categories = mongo.db.categories.find()
         product = mongo.db.products.find_one({"_id": ObjectId(product_id)})
-        return render_template('edit_product.html', product=product)
+        return render_template('edit_product.html', product=product, categories=categories)
     else:
         return redirect(url_for("fourofour"))
 
