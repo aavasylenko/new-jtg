@@ -19,10 +19,10 @@
 <nav class="navbar nav-2">
 {% if category == "ammo" %}
   <a class="nav-link active-link" href="{{ url_for('shop_ammo') }}">Ammo</a>
-  <a class="nav-link non-active-link" href="{{ url_for('shop_parts') }}">Gun Parts</a>
+  <a class="nav-link non-active-link" href="{{ url_for('shop_parts') }}">Guns & Parts</a>
 {% else %}
 <a class="nav-link non-active-link" href="{{ url_for('shop_ammo') }}">Ammo</a>
-  <a class="nav-link active-link" href="{{ url_for('shop_parts') }}">Gun Parts</a>
+  <a class="nav-link active-link" href="{{ url_for('shop_parts') }}">Guns & Parts</a>
 {% endif %}
 </nav>
 

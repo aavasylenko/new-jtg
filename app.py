@@ -30,10 +30,10 @@ def shop_ammo():
     return render_template('shop.html', products=products, category="ammo")
 
 
-@app.route("/shop_parts", methods = ["GET", "POST"])
+@app.route("/shop_guns&parts", methods = ["GET", "POST"])
 def shop_parts():
-    products = list(mongo.db.products.find({"category": "parts"}))
-    return render_template('shop.html', products=products, category="parts")
+    products = list(mongo.db.products.find({"category": "guns&parts"}))
+    return render_template('shop.html', products=products, category="guns&parts")
 
 
 @app.route('/404')
@@ -144,7 +144,7 @@ def delete_product(product_id):
     if session["user"] == "admin":
         mongo.db.products.remove({"_id": ObjectId(product_id)})
         flash("Product Successfully Deleted")
-        return redirect(url_for("shop"))
+        return redirect(url_for("shop_ammo"))
     else:
         return redirect(url_for("fourofour"))
 
