@@ -27,13 +27,13 @@ def index():
 @app.route("/shop_ammo", methods = ["GET", "POST"])
 def shop_ammo():
     products = list(mongo.db.products.find({"category": "ammo"}))
-    return render_template('shop.html', products=products)
+    return render_template('shop.html', products=products, category="ammo")
 
 
 @app.route("/shop_parts", methods = ["GET", "POST"])
 def shop_parts():
     products = list(mongo.db.products.find({"category": "parts"}))
-    return render_template('shop.html', products=products)
+    return render_template('shop.html', products=products, category="parts")
 
 
 @app.route('/404')
